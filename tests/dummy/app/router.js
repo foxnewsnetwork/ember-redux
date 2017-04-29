@@ -22,6 +22,8 @@ Router.map(function() {
   this.route('super', { path: '/super' });
   this.route('thunk', { path: '/thunk' });
   this.route('simple', { path: '/simple' });
+  this.route('actionz', { path: '/actionz' });
+  this.route('query-params', { path: '/query-params' });
 });
 
 export default Router;

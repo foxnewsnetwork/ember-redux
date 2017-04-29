@@ -1,6 +1,42 @@
 ember-redux Changelog
 ==============================
 
+2.4.0
+-----
+
+* [PERFORMANCE]: Only call stateToComputed once per state update
+  ([#114](https://github.com/ember-redux/ember-redux/pull/114))
+
+
+2.3.0
+-----
+
+* [DEPENDENCY]: upgraded to ember-cli v2.13.0-beta.4
+  ([#111](https://github.com/ember-redux/ember-redux/pull/111))
+
+* [FEATURE]: unlock action creators
+  ([#107](https://github.com/ember-redux/ember-redux/pull/107))
+
+* [DEPENDENCY]: upgraded to ember-cli v2.13.0-beta.3
+  ([#106](https://github.com/ember-redux/ember-redux/pull/106))
+
+* [BUILD]: upgrade to firefox 51
+  ([#104](https://github.com/ember-redux/ember-redux/pull/104))
+
+* [DOCS]: Fix Redux link
+  ([#103](https://github.com/ember-redux/ember-redux/pull/103))
+
+
+2.2.0
+-----
+
+* [FEATURE]: Support redux-devtools in browser
+  ([#99](https://github.com/ember-redux/ember-redux/pull/99))
+
+* [TESTS]: fixed readOnly assertion for ember 2.11.3
+  ([commit](https://github.com/ember-redux/ember-redux/commit/7a0aea1e7ceb39ebb0e90937d5ef8868c29ffd1e))
+
+
 2.1.0
 -----
 

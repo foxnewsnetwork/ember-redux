@@ -86,16 +86,7 @@ export default UserTableComponent;
 
 1. Install the [redux dev tools extension].
 
-2. Add a folder named enhancers with one file named `index.js`.
-
-3. In that file, add the following 3 lines of code:
-
-    ```js
-    //app/enhancers/index.js
-    import { compose } from 'redux';
-    var devtools = window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f;
-    export default compose(devtools);
-    ```
+2. Enjoy!
 
 ## Running Tests
 
@@ -123,6 +114,6 @@ Licensed under the MIT License
 
 [ember-cli]: http://www.ember-cli.com/
 [ember.js]: http://emberjs.com/
-[redux]: https://github.com/rackt/redux/
+[redux]: https://github.com/reactjs/redux
 
 [redux dev tools extension]: https://github.com/zalmoxisus/redux-devtools-extension
