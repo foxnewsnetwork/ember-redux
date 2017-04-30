@@ -43,7 +43,6 @@
     "ember-maybe-import-regenerator": "0.1.4",
     "ember-redux-saga-shim": "0.1.0",
     "ember-redux-shim": "^1.1.0",
-    "ember-redux-thunk-shim": "^1.1.1",
     "ember-source": "~2.12.1",
     "ember-symbol-observable": "^0.1.2",
     "ember-resolver": "^4.0.0",
@@ -61,7 +60,8 @@
     "redux"
   ],
   "dependencies": {
-    "ember-cli-babel": "^6.0.0-beta.3"
+    "ember-cli-babel": "^6.0.0-beta.3",
+    "ember-redux-thunk-shim": "^2.0.0"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"

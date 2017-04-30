@@ -82,6 +82,41 @@ export default UserTableComponent;
 {{/user-list}}
 ```
 
+## Customizing the Redux Service
+The `ember-redux/services/redux` service automatically loads the following from your app:
+
+* `app/reducers/index` - your reducers
+* `app/enhancers/index` - your enhancers
+* `app/middleware/index` - your middleware configs
+
+For the purposes of customization, it's often enough to change whatever you need to in the above files. However, you can also directly extend the `ember-redux/services/redux` in the event you require finer control over the redux setup process:
+
+```javascript
+import ReduxService from 'ember-redux/services/redux';
+
+export default ReduxService.extend({
+  makeStoreInstance({middlewareConfig, reducers, enhancers}) {
+    const store = whatever();
+    return store;
+  }
+});
+```
+
+By default, `ReduxService` creates for an instance of the redux for you in the init function like so:
+
+```javascript
+const makeStoreInstance = ({middlewareConfig, reducers, enhancers}) => {
+  const { middleware, setup = () => {} } = extractMiddlewareConfig(middlewareConfig);
+  const createStoreWithMiddleware = compose(applyMiddleware(...middleware), enhancers)(createStore);
+  const store = createStoreWithMiddleware(combineReducers(reducers));
+  setup(store);
+  return store;
+};
+```
+
+## Why Doesn't This Work With My Version of Ember-CLI?!
+You'll need your ember-cli to be version 2.10.x or higher. This is because anonymous AMD transforms (which we use to grab redux-thunk) was only introduced in 2.10.x. Happy upgrading!
+
 ## How do I enable time travel debugging?
 
 1. Install the [redux dev tools extension].

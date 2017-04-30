@@ -1,10 +1,10 @@
 import Ember from 'ember';
 import redux from 'redux';
-import reducers from '../reducers/index';
+import reducers from '../reducers/optional';
 import enhancers from '../enhancers/index';
 import middlewareConfig from '../middleware/index';
 
-const { assert, isArray } = Ember;
+const { assert, isArray, get } = Ember;
 
 // Handle "classic" middleware exports (i.e. an array), as well as the hash option
 const extractMiddlewareConfig = (mc) => {
@@ -15,16 +15,30 @@ const extractMiddlewareConfig = (mc) => {
   return isArray(mc) ? { middleware: mc } : mc;
 }
 
-// Destructure the middleware array and the setup thunk into two different variables
-const { middleware, setup = () => {} } = extractMiddlewareConfig(middlewareConfig);
+const { createStore, applyMiddleware, combineReducers, compose } = redux;
 
-var { createStore, applyMiddleware, combineReducers, compose } = redux;
-var createStoreWithMiddleware = compose(applyMiddleware(...middleware), enhancers)(createStore);
+const makeStoreInstance = ({middlewareConfig, reducers, enhancers}) => {
+  // Destructure the middleware array and the setup thunk into two different variables
+  const { middleware, setup = () => {} } = extractMiddlewareConfig(middlewareConfig);
+  const createStoreWithMiddleware = compose(applyMiddleware(...middleware), enhancers)(createStore);
+  const store = createStoreWithMiddleware(combineReducers(reducers));
+  setup(store);
+  return store;
+};
 
 export default Ember.Service.extend({
+  middlewareConfig,
+  reducers,
+  enhancers,
+  makeStoreInstance,
   init() {
-    this.store = createStoreWithMiddleware(combineReducers(reducers));
-    setup(this.store);
+    // gets the middlewareConfig from the instance of this service
+    // if you'd like to customize your middlewares, you'd probably do it here
+    const middlewareConfig = get(this, 'middlewareConfig');
+    const reducers = get(this, 'reducers');
+    const enhancers = get(this, 'enhancers');
+
+    this.store = this.makeStoreInstance({ middlewareConfig, reducers, enhancers });
     this._super(...arguments);
   },
   getState() {
